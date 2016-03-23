@@ -89,7 +89,8 @@ class BootstrapTable extends React.Component {
       keyField: keyField,
       colInfos: colInfos,
       multiColumnSearch: props.multiColumnSearch,
-      remote: this.isRemoteDataSource()
+      remote: this.isRemoteDataSource(),
+      andSearch: props.andSearch || false
     });
   }
 

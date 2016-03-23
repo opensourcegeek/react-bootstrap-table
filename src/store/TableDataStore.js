@@ -60,13 +60,23 @@ export class TableDataStore {
     this.colInfos = props.colInfos;
     this.remote = props.remote;
     this.multiColumnSearch = props.multiColumnSearch;
+    this.andSearchOnly = props.andSearch;
   }
 
   setData(data) {
     this.data = data;
     if (this.isOnFilter) {
       if (null !== this.filterObj) this.filter(this.filterObj);
-      if (null !== this.searchText) this.search(this.searchText);
+      if (null !== this.searchText) {
+        if(this.andSearchOnly) {
+          this.andSearch(this.searchText);
+
+        } else {
+          this.search(this.searchText);
+        }
+
+
+      }
     }
     if (this.sortObj) {
       this.sort(this.sortObj.order, this.sortObj.sortField);
