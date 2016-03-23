@@ -109,6 +109,7 @@ class ToolBar extends React.Component{
   }
 
   handleKeyUp(e){
+    console.log('Firing search from toolbar');
     this.props.onSearch(e.currentTarget.value);
   }
 

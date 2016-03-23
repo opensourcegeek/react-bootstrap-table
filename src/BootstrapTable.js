@@ -550,11 +550,12 @@ class BootstrapTable extends React.Component {
   }
 
   handleSearch(searchText, andSearch=false) {
-    if(!andSearch) {
-      this.store.search(searchText);
+    if(andSearch) {
+      this.store.andSearch(searchText);
 
     } else {
-      this.store.andSearch(searchText);
+      this.store.search(searchText);
+
     }
 
     let result;
