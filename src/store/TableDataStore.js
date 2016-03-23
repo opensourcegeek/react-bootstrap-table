@@ -330,6 +330,7 @@ export class TableDataStore {
   }
 
   search(searchText) {
+    console.log('Inside OR search');
     if (searchText.trim() === "") {
       this.filteredData = null;
       this.isOnFilter = false;
@@ -375,6 +376,7 @@ export class TableDataStore {
 
 
   andSearch(searchText) {
+    console.log('Inside AND search');
     if (searchText.trim() === "") {
       this.filteredData = null;
       this.isOnFilter = false;
