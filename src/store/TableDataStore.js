@@ -52,6 +52,7 @@ export class TableDataStore {
     this.multiColumnSearch = false;
     this.showOnlySelected = false;
     this.remote = false; // remote data
+    this.andSearchOnly = false;
   }
 
   setProps(props) {
@@ -72,6 +73,7 @@ export class TableDataStore {
           this.andSearch(this.searchText);
 
         } else {
+          console.log('From props search false')
           this.search(this.searchText);
         }
 
