@@ -549,8 +549,14 @@ class BootstrapTable extends React.Component {
     exportCSV(result, keys, this.props.csvFileName);
   }
 
-  handleSearch(searchText) {
-    this.store.search(searchText);
+  handleSearch(searchText, andSearch=false) {
+    if(!andSearch) {
+      this.store.search(searchText);
+
+    } else {
+      this.store.andSearch(searchText);
+    }
+
     let result;
     if (this.props.pagination) {
       const { sizePerPage } = this.state;
