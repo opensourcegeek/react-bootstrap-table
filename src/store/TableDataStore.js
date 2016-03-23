@@ -18,6 +18,17 @@ function _sort(arr, sortField, order, sortFunc) {
   return arr;
 }
 
+function _allTrue(o) {
+  let searchTextObjKeys = Object.keys(o);
+  for(let j=0; j<searchTextObjKeys.length; j++) {
+    if(!o[searchTextObjKeys[j]]) {
+      return false;
+    }
+  }
+  return true;
+
+}
+
 export class TableDataSet extends EventEmitter {
   constructor(data) {
     super(data);
@@ -406,11 +417,19 @@ export class TableDataStore {
       this.filteredData = this.data.filter( row => {
         let keys = Object.keys(row);
         let valid = false;
+        let obj = {};
+
+        for(let i=0; i<searchTextArray.length; i++) {
+          obj[searchTextArray[i]] = false;
+        }
+
         // Changed `for .. in` loop to use `Object.keys`
         for(let i=0; i<keys.length; i++) {
           let key = keys[i];
+
           if (this.colInfos[key] && row[key]) {
             searchTextArray.forEach( text => {
+
               let filterVal = text.toLowerCase();
               let targetVal = row[key];
               const { format, filterFormatted, formatExtraData, hidden } = this.colInfos[key];
@@ -418,11 +437,14 @@ export class TableDataStore {
                 if(filterFormatted && format) {
                   targetVal = format(targetVal, row, formatExtraData);
                 }
-                if (targetVal.toString().toLowerCase().indexOf(filterVal) !== -1) {
-                  valid = true;
+                if (targetVal.toString().toLowerCase() === filterVal) {
+                  obj[text] = true;
                 }
               }
             });
+
+            valid = _allTrue(obj);
+
             if (valid) break;
           }
         }
