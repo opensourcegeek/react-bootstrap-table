@@ -34,6 +34,17 @@ class TableRow extends React.Component{
     }
   }
 
+  customRowDoubleClick(e) {
+    if (e.target.tagName !== 'INPUT' &&
+      e.target.tagName !== 'SELECT' &&
+      e.target.tagName !== 'TEXTAREA') {
+      const rowIndex = e.currentTarget.rowIndex + 1;
+      if (this.props.onCustomRowDoubleClick) {
+        this.props.onCustomRowDoubleClick(rowIndex);
+      }
+    }
+  }
+
   rowMouseOut(e) {
     if (this.props.onRowMouseOut) {
       this.props.onRowMouseOut(e.currentTarget.rowIndex);
@@ -61,7 +72,10 @@ class TableRow extends React.Component{
         <tr {...trCss}
             onMouseOver={this.rowMouseOver.bind(this)}
             onMouseOut={this.rowMouseOut.bind(this)}
-            onClick={this.rowClick.bind(this)}>{this.props.children}</tr>
+            onClick={this.rowClick.bind(this)}
+            onDoubleClick={this.customRowDoubleClick.bind(this)}
+        >{this.props.children}</tr>
+
       )
     }else{
       return(
@@ -76,9 +90,11 @@ TableRow.propTypes = {
   onRowClick: React.PropTypes.func,
   onSelectRow: React.PropTypes.func,
   onRowMouseOut: React.PropTypes.func,
-  onRowMouseOver: React.PropTypes.func
+  onRowMouseOver: React.PropTypes.func,
+  onCustomRowDoubleClick: React.PropTypes.func
 };
 TableRow.defaultProps = {
-  onRowClick: undefined
+  onRowClick: undefined,
+  onCustomRowDoubleClick: undefined
 }
 export default TableRow;

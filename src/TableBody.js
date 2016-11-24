@@ -111,6 +111,7 @@ class TableBody extends React.Component{
           selectRow={isSelectRowDefined?this.props.selectRow:undefined}
           enableCellEdit={this.props.cellEdit.mode !== Const.CELL_EDIT_NONE}
           onRowClick={this.handleRowClick.bind(this)}
+          onCustomRowDoubleClick={this.handleCustomRowDoubleClick.bind(this)}
           onRowMouseOver={this.handleRowMouseOver.bind(this)}
           onRowMouseOut={this.handleRowMouseOut.bind(this)}
           onSelectRow={this.handleSelectRow.bind(this)}>
@@ -194,6 +195,17 @@ class TableBody extends React.Component{
       }
     }, this);
     this.props.onRowClick(selectedRow);
+  }
+
+  handleCustomRowDoubleClick(rowIndex) {
+    var key, selectedRow;
+    this.props.data.forEach(function(row, i){
+      if(i == rowIndex-1){
+        key = row[this.props.keyField];
+        selectedRow = row;
+      }
+    }, this);
+    this.props.onCustomRowDoubleClick(selectedRow);
   }
 
   handleSelectRow(rowIndex, isSelected){
@@ -310,6 +322,7 @@ TableBody.propTypes = {
   keyField: React.PropTypes.string,
   selectedRowKeys: React.PropTypes.array,
   onRowClick: React.PropTypes.func,
+  onCustomRowDoubleClick: React.PropTypes.func,
   onSelectRow: React.PropTypes.func,
   noDataText: React.PropTypes.string
 };

@@ -20,8 +20,12 @@ function addProducts(quantity) {
 addProducts(5);
 
 var options = {
-  onRowClick: function(row){
-    alert('You click row id: '+row.id);
+  // onRowClick: function(row){
+  //   alert('You click row id: '+row.id);
+  // },
+
+  onCustomRowDoubleClick: function(row) {
+    alert('double clicked ' + row.id);
   }
 };
 

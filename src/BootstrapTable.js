@@ -260,6 +260,7 @@ class BootstrapTable extends React.Component {
             cellEdit={this.props.cellEdit}
             selectedRowKeys={this.state.selectedRowKeys}
             onRowClick={this.handleRowClick.bind(this)}
+            onCustomRowDoubleClick={this.handleCustomRowDoubleClick.bind(this)}
             onRowMouseOver={this.handleRowMouseOver.bind(this)}
             onRowMouseOut={this.handleRowMouseOut.bind(this)}
             onSelectRow={this.handleSelectRow.bind(this)}
@@ -345,6 +346,12 @@ class BootstrapTable extends React.Component {
   handleRowClick(row) {
     if (this.props.options.onRowClick) {
       this.props.options.onRowClick(row);
+    }
+  }
+
+  handleCustomRowDoubleClick(row) {
+    if (this.props.options.onCustomRowDoubleClick) {
+      this.props.options.onCustomRowDoubleClick(row);
     }
   }
 
